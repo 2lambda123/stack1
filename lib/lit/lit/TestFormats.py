@@ -223,7 +223,8 @@ class OneCommandPerFileTest:
         return Test.FAIL, report
 
 class SyntaxCheckTest(OneCommandPerFileTest):
-    def __init__(self, compiler, dir, extra_cxx_args=[], *args, **kwargs):
+    def __init__(self, compiler, dir, extra_cxx_args=None, *args, **kwargs):
+        extra_cxx_args = [] if extra_cxx_args is None else extra_cxx_args
         cmd = [compiler, '-x', 'c++', '-fsyntax-only'] + extra_cxx_args
         OneCommandPerFileTest.__init__(self, cmd, dir,
                                        useTempInput=1, *args, **kwargs)
